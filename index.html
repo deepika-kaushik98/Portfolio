@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepika Kaushik | Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: radial-gradient(1200px 600px at 70% 10%, #010308, #0f172a 40%, #0a0f1e 80%); color: #f1f5f9; overflow-x: hidden; min-height: 100vh; position: relative; }
+
+    /* Universe */
+    #universe { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .star { position: absolute; width: 2px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 50%; box-shadow: 0 0 6px rgba(255,255,255,0.6); animation: twinkle 3s infinite ease-in-out; }
+    .star.layer2 { width: 1.5px; height: 1.5px; opacity: 0.7; animation-duration: 4.5s; filter: blur(0.2px); }
+    .star.layer3 { width: 1px; height: 1px; opacity: 0.6; animation-duration: 6s; filter: blur(0.6px); }
+    @keyframes twinkle { 0%,100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+
+    /* Free moving stars */
+    .moving-star { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: white; box-shadow: 0 0 12px rgba(255,255,255,0.8); animation: moveStar linear infinite; }
+    @keyframes moveStar { from { transform: translate(0,0); } to { transform: translate(100vw, -100vh); } }
+
+      /*Moon*/
+    .moon { position: fixed; top: 8vh; right: 6vw; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff 0%, #f4f6ff 40%, #dbe4ff 60%, #9aa7d1 100%); box-shadow: 0 0 40px rgba(173,197,255,0.6), 0 0 80px rgba(173,197,255,0.4); z-index: 0; filter: drop-shadow(0 10px 40px rgba(120,150,255,0.35)); animation: moonFloat 18s ease-in-out infinite; pointer-events: none; }
+    .crater { position: absolute; background: radial-gradient(circle at 30% 30%, #cbd5e1, #94a3b8 60%, #64748b 100%); border-radius: 50%; opacity: 0.6; filter: blur(0.3px); }
+    .crater.c1 { width: 18px; height: 18px; top: 38px; left: 28px; }
+    .crater.c2 { width: 12px; height: 12px; top: 66px; left: 54px; }
+    .crater.c3 { width: 9px; height: 9px; top: 24px; left: 72px; }
+    @keyframes moonFloat { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(10px); } }
+
+    header { background: linear-gradient(135deg, #0ea5e9, #2563eb); color: #fff; padding: 3rem 1rem; text-align: center; position: relative; z-index: 1; }
+    header h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+    header p { font-size: 1.3rem; }
+
+    nav { margin-top: 1.5rem; }
+    nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: 500; }
+
+    section { padding: 4rem 1rem; max-width: 1000px; margin: auto; position: relative; z-index: 1; }
+    h2 { color: #38bdf8; margin-bottom: 1.5rem; font-size: 2rem; text-align: center; }
+
+    .skills, .projects, .certificates { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .card { background: #1e293b; color: #f1f5f9; border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 16px rgba(0,0,0,0.4); transition: transform 0.3s, box-shadow 0.3s; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 10px 24px rgba(0,0,0,0.6); }
+
+    footer { background: #0b1020; color: #cbd5e1; text-align: center; padding: 1.5rem; margin-top: 3rem; }
+
+    /* Sparkle scroll button */
+    #scrollTopBtn { position: fixed; bottom: 20px; right: 20px; padding: 0.7rem 1rem; font-size: 18px; background: #38bdf8; color: #fff; border: none; border-radius: 50%; cursor: pointer; display: none; z-index: 3; overflow: hidden; }
+    #scrollTopBtn::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 20%); background-size: 20px 20px; animation: sparkle 3s linear infinite; }
+    @keyframes sparkle { from { transform: translate(0,0); } to { transform: translate(20px,20px); } }
+     #feedback { padding: 4rem 1rem; max-width: 800px; margin: 0 auto; }
+    #feedback form { display: flex; flex-direction: column; gap: 1rem; background: #1e293b; padding: 2rem; border-radius: 12px; }
+    #feedback label { font-size: 1rem; }
+    #feedback input, #feedback textarea { padding: 0.7rem; border-radius: 8px; border: none; }
+    #feedback button { padding: 0.8rem; border: none; border-radius: 8px; background: #38bdf8; color: #fff; font-weight: bold; cursor: pointer; }
+ 
+  </style>
+  
+</head>
+<body>
+  <!-- Universe background -->
+  <div id="universe"></div>
+  <div class="moon"><span class="crater c1"></span><span class="crater c2"></span><span class="crater c3"></span></div>
+
+  <header>
+    <h1>Hi, I’m Deepika</h1>
+    <p>Full Stack Developer • Frontend Specialist</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#feedback">Feedback</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+Final-year Computer Science Engineering student with strong expertise in Java, C++, Python, 
+MERN stack, and modern web technologies. Experienced in developing and deploying 
+scalable web applications. Skilled in API development, testing, database management, 
+responsive web design, cloud deployment (AWS), and DevOps practices. Actively seeking 
+Software Engineer, Web Developer, or Full Stack Developer roles. </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="card">HTML5, CSS3, JavaScript</div>
+      <div class="card">React.js, Redux Toolkit</div>
+      <div class="card">Node.js, Express.js</div>
+      <div class="card">MongoDB, MySQL</div>
+      <div class="card">Tailwind CSS, Bootstrap</div>
+      <div class="card">Git/GitHub, Postman</div>
+      <div class="card">Cloudinary, Stripe, Firebase</div>
+      <div class="card">DSA, Problem Solving</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="card">
+        <h3>MegaMart – E-Commerce Website</h3>
+        <p>Responsive shopping app with product listing, cart, and checkout flow.</p>
+        <small>Tech: HTML5, CSS3, JS, Bootstrap/Tailwind</small>
+        <div class="project-links">
+          <a href="https://megamart-76bc.vercel.app/addToCart.html" target="_blank">Live Demo</a>
+          <a href="https://github.com/deepika/megamart" target="_blank">Live Code</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3>CodePen Editor – React App</h3>
+        <p>Web-based code editor with live preview for HTML, CSS, and JS.</p>
+        <small>Tech: React.js, Hooks</small>
+        <div class="project-links">
+          <a href="https://codepen-clone-using-react.vercel.app/" target="_blank">Live Demo</a>
+          <a href="https://github.com/deepika/codepen-clone" target="_blank">Live Code</a>
+        </div>
+      </div>
+         <div class="card">
+        <h3>3D Solar System</h3>
+        <p>A 3D Solar System is an interactive web project built using Three.js that visually represents planets orbiting the sun in a realistic 3D space.</p>
+        <small>Tech: Html ,Css, Three.js</small>
+        <div class="project-links">
+          <a href="https://solar-system-by-three-js-a2ob.vercel.app/" target="_blank">Live Demo</a>
+          <a href="https://github.com/deepika-kaushik98/Solar-System-by-three.js" target="_blank">Live Code</a>
+        </div>
+      </div>
+         <div class="card">
+        <h3>Loan Calculator</h3>
+        <p>A Loan Calculator is a tool that calculates monthly installments (EMI), interest, and total repayment based on loan amount, interest rate, and tenure.</p>
+        <small>Tech: Html , Css ,Javascript</small>
+        <div class="project-links">
+          <a href="https://loan-calculate-app.vercel.app/" target="_blank">Live Demo</a>
+          <a href="https://github.com/deepika-kaushik98/loan-calculate-app" target="_blank">Live Code</a>
+        </div>
+      </div>
+         <div class="card">
+        <h3>Currency Convertor</h3>
+        <p>A Currency Converter is a web tool that converts an entered amount from one currency to another using real-time or predefined exchange rates.</p>
+        <small>Tech: Html , Css ,Javascript</small>
+        <div class="project-links">
+          <a href="https://currency-convertor-five-woad.vercel.app/" target="_blank">Live Demo</a>
+          <a href="https://github.com/deepika-kaushik98/currency-convertor" target="_blank">Live Code</a>
+        </div>
+      </div>
+         <div class="card">
+        <h3>Age Calculator</h3>
+        <p>An Age Calculator is a simple tool that calculates a person’s exact age in years, months, and days based on their date of birth.</p>
+        <small>Tech: Html , Css ,Javascript</small>
+        <div class="project-links">
+          <a href="https://age-calculator-murex-nu.vercel.app/" target="_blank">Live Demo</a>
+          <a href="https://github.com/deepika-kaushik98/age-calculator" target="_blank">Live Code</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience / Internships</h2>
+    
+     <div class="card">
+      <h3> EDUNET FOUNDATION - IBM SKILLSBUILD - FRONT END WEB DEVELOPMENT INTERNSHIP</h3>
+      <p>Edunet Foundation – AICTE Internship  | Currently Working</p>
+      <ul>
+        <li>I am currently pursuing a Front-End Web Development internship with Edunet Foundation in collaboration with IBM SkillsBuild, 
+          where I am enhancing my skills in HTML, CSS, JavaScript, 
+          and modern frameworks to build responsive and user-friendly web applications.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+      <h3>Software Engineering Intern (Virtual)</h3>
+      <p>J.P. Morgan Chase & Co | Aug 2025</p>
+      <ul>
+        <li>Solved real-world coding and data visualization challenges.</li>
+        <li>Optimized code efficiency and debugging practices.</li>
+        <li>Strengthened analytical and collaboration skills.</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <h3>Full Stack Developer Intern</h3>
+      <p>Yhills | Jun 2025 – Jul 2025</p>
+      <ul>
+        <li>Developed responsive MERN applications.</li>
+        <li>Implemented authentication, REST APIs, and database integration.</li>
+        <li>Collaborated in agile teams on live projects.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="card">B.Tech in Computer Science & Engineering – TIT&S, Bhiwani | Sep 2022 – Present</div>
+    <div class="card">Senior Secondary (XII) – K.S.N. Senior Secondary School, Bhiwani | 89.6%</div>
+    <div class="card">Secondary (X) – K.S.N. Senior Secondary School, Bhiwani | 93.2%</div>
+  </section>
+
+  <section id="certificates">
+    <h2>Certificates & Achievements</h2>
+    <div class="certificates">
+      <div class="card">Full Stack Developer – Yhills</div>
+      <div class="card">Software Engineer Intern – J.P. Morgan Chase & Co</div>
+      <div class="card">Java – Great Learning</div>
+      <div class="card">Responsive Web Design – FreeCodeCamp</div>
+      <div class="card">Canva – Simplilearn</div>
+      <div class="card">Technology Job Simulation – Deloitte (The Forage)</div>
+      <div class="card">Software Engineering Job Simulation – Accenture (The Forage)</div>
+      <div class="card">Solutions Architecture Job Simulation – AWS (The Forage)</div>
+      <div class="card">Front-End Software Engineering Job Simulation – The Forage</div>
+    </div>
+  </section>
+
+  <section id="feedback">
+    <h2>Feedback</h2>
+    <form action="#" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="message">Your Feedback:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Deepika Kaushik. All Rights Reserved.</p>
+  </footer>
+
+   
+
+  <script>
+    const universe = document.getElementById('universe');
+    let starCount = 220;
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+    function createStar(layer = 1) {
+      const s = document.createElement('span');
+      s.className = `star layer${layer}`;
+      s.style.left = rand(0, window.innerWidth) + 'px';
+      s.style.top = rand(0, window.innerHeight) + 'px';
+      s.style.animationDelay = rand(0, 6) + 's';
+      universe.appendChild(s);
+    }
+    function populateStars() {
+      universe.innerHTML = '';
+      for (let i = 0; i < starCount; i++) {
+        const layer = i % 3 === 0 ? 3 : (i % 2 === 0 ? 2 : 1);
+        createStar(layer);
+      }
+    }
+    populateStars();
+    window.addEventListener('resize', () => populateStars());
+  </script>
+</body>
+</html>
